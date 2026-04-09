@@ -19,6 +19,14 @@
       padding: 3rem 1.5rem;
     }
 
+    .question {
+  font-size: 0.95rem;
+  color: #3a3a37;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  max-width: 600px;
+}
+
     .dashboard {
       width: 100%;
       max-width: 720px;
@@ -167,7 +175,7 @@
   <div class="dashboard">
     <div class="header">
       <h1>Survey Results by State</h1>
-      <h1> As far as you know, does [STATE] currently allow citizens to place proposed laws or constitutional amendments on the ballot by gathering signatures?</h1>
+  <p class="question">As far as you know, does <strong id="stateName">Georgia</strong> currently allow citizens to place proposed laws or constitutional amendments on the ballot by gathering signatures?</p>
       <p>Select a state to explore response breakdown</p>
     </div>
 
@@ -281,6 +289,7 @@
       document.getElementById('valNo').textContent      = d.no.toFixed(2) + '%';
       document.getElementById('valYes').textContent     = d.yes.toFixed(2) + '%';
       document.getElementById('valNotSure').textContent = d.notSure.toFixed(2) + '%';
+      document.getElementById('stateName').textContent = state;
     }
 
     select.addEventListener('change', e => updateChart(e.target.value));
