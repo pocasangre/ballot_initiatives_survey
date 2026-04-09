@@ -19,14 +19,6 @@
       padding: 3rem 1.5rem;
     }
 
-    .question {
-  font-size: 0.95rem;
-  color: #3a3a37;
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-  max-width: 600px;
-}
-
     .dashboard {
       width: 100%;
       max-width: 720px;
@@ -47,6 +39,14 @@
     .header p {
       font-size: 0.9rem;
       color: #6b6b67;
+    }
+
+    .question {
+      font-size: 0.95rem;
+      color: #3a3a37;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      max-width: 600px;
     }
 
     .control-row {
@@ -92,9 +92,13 @@
 
     .metric-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 1.75rem;
+    }
+
+    .metric-row.five-col {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .metric-card {
@@ -109,7 +113,7 @@
     .metric-card:hover { border-color: #bfbdb8; }
 
     .metric-label {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -138,7 +142,7 @@
 
     .legend {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
@@ -155,12 +159,19 @@
       width: 10px;
       height: 10px;
       border-radius: 2px;
+      flex-shrink: 0;
     }
 
     .chart-wrap {
       position: relative;
       width: 100%;
       height: 280px;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1.5px solid #e8e6e0;
+      margin: 2.5rem 0;
     }
 
     .footer {
@@ -173,16 +184,21 @@
 </head>
 <body>
   <div class="dashboard">
+
+    <!-- Page header -->
     <div class="header">
-      <h1>Survey Results by State (TEST SITE) </h1>
-  <p class="question">As far as you know, does <strong id="stateName">Georgia</strong> currently allow citizens to place proposed laws or constitutional amendments on the ballot by gathering signatures?</p>
+      <h1>Survey Results by State (TEST SITE)</h1>
       <p>Select a state to explore response breakdown</p>
     </div>
 
+    <!-- State selector -->
     <div class="control-row">
       <label for="stateSelect">State</label>
       <select id="stateSelect"></select>
     </div>
+
+    <!-- Question 1 -->
+    <p class="question">As far as you know, does <strong id="stateName">Georgia</strong> currently allow citizens to place proposed laws or constitutional amendments on the ballot by gathering signatures?</p>
 
     <div class="metric-row">
       <div class="metric-card no">
@@ -210,62 +226,64 @@
       </div>
     </div>
 
-  </div>
+    <hr class="section-divider" />
 
-<!-- Second question -->
-<div class="header" style="margin-top: 2.5rem;">
-  <p class="question">How much would you support <strong id="stateName2">Georgia</strong> adopting a ballot initiative process?</p>
-</div>
+    <!-- Question 2 -->
+    <p class="question">How much would you support <strong id="stateName2">Georgia</strong> adopting a ballot initiative process?</p>
 
-<div class="metric-row" style="grid-template-columns: repeat(5, minmax(0, 1fr));">
-  <div class="metric-card" style="border-top: 3px solid #A32D2D;">
-    <div class="metric-label">Strongly Oppose</div>
-    <div class="metric-value" id="valSO" style="font-size:1.1rem; color:#A32D2D;">—</div>
-  </div>
-  <div class="metric-card" style="border-top: 3px solid #E24B4A;">
-    <div class="metric-label">Somewhat Oppose</div>
-    <div class="metric-value" id="valSwO" style="font-size:1.1rem; color:#E24B4A;">—</div>
-  </div>
-  <div class="metric-card" style="border-top: 3px solid #888780;">
-    <div class="metric-label">Neither</div>
-    <div class="metric-value" id="valN" style="font-size:1.1rem; color:#888780;">—</div>
-  </div>
-  <div class="metric-card" style="border-top: 3px solid #378ADD;">
-    <div class="metric-label">Somewhat Support</div>
-    <div class="metric-value" id="valSwS" style="font-size:1.1rem; color:#378ADD;">—</div>
-  </div>
-  <div class="metric-card" style="border-top: 3px solid #185FA5;">
-    <div class="metric-label">Strongly Support</div>
-    <div class="metric-value" id="valSS" style="font-size:1.1rem; color:#185FA5;">—</div>
-  </div>
-</div>
+    <div class="metric-row five-col">
+      <div class="metric-card" style="border-top: 3px solid #A32D2D;">
+        <div class="metric-label">Strongly Oppose</div>
+        <div class="metric-value" id="valSO" style="font-size:1.1rem; color:#A32D2D;">—</div>
+      </div>
+      <div class="metric-card" style="border-top: 3px solid #E24B4A;">
+        <div class="metric-label">Somewhat Oppose</div>
+        <div class="metric-value" id="valSwO" style="font-size:1.1rem; color:#E24B4A;">—</div>
+      </div>
+      <div class="metric-card" style="border-top: 3px solid #888780;">
+        <div class="metric-label">Neither</div>
+        <div class="metric-value" id="valN" style="font-size:1.1rem; color:#888780;">—</div>
+      </div>
+      <div class="metric-card" style="border-top: 3px solid #378ADD;">
+        <div class="metric-label">Somewhat Support</div>
+        <div class="metric-value" id="valSwS" style="font-size:1.1rem; color:#378ADD;">—</div>
+      </div>
+      <div class="metric-card" style="border-top: 3px solid #185FA5;">
+        <div class="metric-label">Strongly Support</div>
+        <div class="metric-value" id="valSS" style="font-size:1.1rem; color:#185FA5;">—</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="legend">
+        <span class="legend-item"><span class="legend-swatch" style="background:#A32D2D;"></span>Strongly Oppose</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#E24B4A;"></span>Somewhat Oppose</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#888780;"></span>Neither</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#378ADD;"></span>Somewhat Support</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#185FA5;"></span>Strongly Support</span>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="surveyChart2" role="img" aria-label="Bar chart showing support levels for ballot initiative process"></canvas>
+      </div>
+    </div>
+
     <div class="footer">Survey data across 9 states &mdash; responses shown as percentages</div>
 
-<div class="chart-card">
-  <div class="legend">
-    <span class="legend-item"><span class="legend-swatch" style="background:#A32D2D;"></span>Strongly Oppose</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:#E24B4A;"></span>Somewhat Oppose</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:#888780;"></span>Neither</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:#378ADD;"></span>Somewhat Support</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:#185FA5;"></span>Strongly Support</span>
-  </div>
-  <div class="chart-wrap">
-    <canvas id="surveyChart2" role="img" aria-label="Bar chart showing support levels for ballot initiative process"></canvas>
-  </div>
-</div>
+  </div> <!-- end .dashboard -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script>
     const data = {
-  "Georgia":        { no: 14.78, yes: 24.47, notSure: 60.76, sOppose: 3.97,  swOppose: 8.64,  neither: 37.02, swSupport: 28.78, sSupport: 21.59 },
-  "Iowa":           { no: 11.51, yes: 23.31, notSure: 65.19, sOppose: 2.80,  swOppose: 4.06,  neither: 38.43, swSupport: 34.15, sSupport: 20.56 },
-  "Kansas":         { no: 5.05,  yes: 32.75, notSure: 62.19, sOppose: 4.14,  swOppose: 3.60,  neither: 41.48, swSupport: 26.72, sSupport: 24.05 },
-  "Minnesota":      { no: 10.65, yes: 24.03, notSure: 65.32, sOppose: 5.33,  swOppose: 6.93,  neither: 34.86, swSupport: 31.69, sSupport: 21.19 },
-  "North Carolina": { no: 13.00, yes: 22.30, notSure: 64.70, sOppose: 1.75,  swOppose: 6.06,  neither: 38.81, swSupport: 31.64, sSupport: 21.75 },
-  "New Hampshire":  { no: 6.52,  yes: 36.22, notSure: 57.26, sOppose: 3.46,  swOppose: 7.06,  neither: 37.19, swSupport: 25.99, sSupport: 26.30 },
-  "Pennsylvania":   { no: 10.11, yes: 25.95, notSure: 63.94, sOppose: 3.31,  swOppose: 4.66,  neither: 40.59, swSupport: 32.87, sSupport: 18.58 },
-  "Virginia":       { no: 9.46,  yes: 33.07, notSure: 57.47, sOppose: 3.25,  swOppose: 5.84,  neither: 38.18, swSupport: 28.18, sSupport: 24.55 },
-  "Vermont":        { no: 9.15,  yes: 29.75, notSure: 61.09, sOppose: 3.95,  swOppose: 5.74,  neither: 40.08, swSupport: 35.52, sSupport: 14.71 },
-};
+      "Georgia":        { no: 14.78, yes: 24.47, notSure: 60.76, sOppose: 3.97,  swOppose: 8.64,  neither: 37.02, swSupport: 28.78, sSupport: 21.59 },
+      "Iowa":           { no: 11.51, yes: 23.31, notSure: 65.19, sOppose: 2.80,  swOppose: 4.06,  neither: 38.43, swSupport: 34.15, sSupport: 20.56 },
+      "Kansas":         { no: 5.05,  yes: 32.75, notSure: 62.19, sOppose: 4.14,  swOppose: 3.60,  neither: 41.48, swSupport: 26.72, sSupport: 24.05 },
+      "Minnesota":      { no: 10.65, yes: 24.03, notSure: 65.32, sOppose: 5.33,  swOppose: 6.93,  neither: 34.86, swSupport: 31.69, sSupport: 21.19 },
+      "North Carolina": { no: 13.00, yes: 22.30, notSure: 64.70, sOppose: 1.75,  swOppose: 6.06,  neither: 38.81, swSupport: 31.64, sSupport: 21.75 },
+      "New Hampshire":  { no: 6.52,  yes: 36.22, notSure: 57.26, sOppose: 3.46,  swOppose: 7.06,  neither: 37.19, swSupport: 25.99, sSupport: 26.30 },
+      "Pennsylvania":   { no: 10.11, yes: 25.95, notSure: 63.94, sOppose: 3.31,  swOppose: 4.66,  neither: 40.59, swSupport: 32.87, sSupport: 18.58 },
+      "Virginia":       { no: 9.46,  yes: 33.07, notSure: 57.47, sOppose: 3.25,  swOppose: 5.84,  neither: 38.18, swSupport: 28.18, sSupport: 24.55 },
+      "Vermont":        { no: 9.15,  yes: 29.75, notSure: 61.09, sOppose: 3.95,  swOppose: 5.74,  neither: 40.08, swSupport: 35.52, sSupport: 14.71 },
+    };
 
     const select = document.getElementById('stateSelect');
     Object.keys(data).forEach(state => {
@@ -275,8 +293,7 @@
       select.appendChild(opt);
     });
 
-    const ctx = document.getElementById('surveyChart').getContext('2d');
-    const chart = new Chart(ctx, {
+    const chart = new Chart(document.getElementById('surveyChart').getContext('2d'), {
       type: 'bar',
       data: {
         labels: ['No', 'Yes', 'Not Sure'],
@@ -293,85 +310,75 @@
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => ctx.parsed.y.toFixed(2) + '%'
-            }
-          }
+          tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(2) + '%' } }
         },
         scales: {
           y: {
-            min: 0,
-            max: 100,
-            ticks: {
-              callback: v => v + '%',
-              color: '#9e9c97',
-              font: { family: "'DM Sans', sans-serif", size: 12 }
-            },
+            min: 0, max: 100,
+            ticks: { callback: v => v + '%', color: '#9e9c97', font: { family: "'DM Sans', sans-serif", size: 12 } },
             grid: { color: 'rgba(0,0,0,0.06)' },
             border: { dash: [4, 4], color: 'transparent' }
           },
           x: {
-            ticks: {
-              color: '#6b6b67',
-              font: { family: "'DM Sans', sans-serif", size: 13, weight: '500' }
-            },
+            ticks: { color: '#6b6b67', font: { family: "'DM Sans', sans-serif", size: 13, weight: '500' } },
             grid: { display: false }
           }
         }
       }
     });
 
-    const ctx2 = document.getElementById('surveyChart2').getContext('2d');
-const chart2 = new Chart(ctx2, {
-  type: 'bar',
-  data: {
-    labels: ['Strongly Oppose', 'Somewhat Oppose', 'Neither', 'Somewhat Support', 'Strongly Support'],
-    datasets: [{
-      label: 'Response %',
-      data: [0, 0, 0, 0, 0],
-      backgroundColor: ['#A32D2D', '#E24B4A', '#888780', '#378ADD', '#185FA5'],
-      borderRadius: 6,
-      barPercentage: 0.45,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(2) + '%' } }
-    },
-    scales: {
-      y: {
-        min: 0, max: 100,
-        ticks: { callback: v => v + '%', color: '#9e9c97', font: { family: "'DM Sans', sans-serif", size: 12 } },
-        grid: { color: 'rgba(0,0,0,0.06)' },
-        border: { dash: [4, 4], color: 'transparent' }
+    const chart2 = new Chart(document.getElementById('surveyChart2').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Strongly Oppose', 'Somewhat Oppose', 'Neither', 'Somewhat Support', 'Strongly Support'],
+        datasets: [{
+          label: 'Response %',
+          data: [0, 0, 0, 0, 0],
+          backgroundColor: ['#A32D2D', '#E24B4A', '#888780', '#378ADD', '#185FA5'],
+          borderRadius: 6,
+          barPercentage: 0.45,
+        }]
       },
-      x: {
-        ticks: { color: '#6b6b67', font: { family: "'DM Sans', sans-serif", size: 12, weight: '500' } },
-        grid: { display: false }
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(2) + '%' } }
+        },
+        scales: {
+          y: {
+            min: 0, max: 100,
+            ticks: { callback: v => v + '%', color: '#9e9c97', font: { family: "'DM Sans', sans-serif", size: 12 } },
+            grid: { color: 'rgba(0,0,0,0.06)' },
+            border: { dash: [4, 4], color: 'transparent' }
+          },
+          x: {
+            ticks: { color: '#6b6b67', font: { family: "'DM Sans', sans-serif", size: 12, weight: '500' } },
+            grid: { display: false }
+          }
+        }
       }
-    }
-  }
-});
+    });
+
     function updateChart(state) {
       const d = data[state];
+
       chart.data.datasets[0].data = [d.no, d.yes, d.notSure];
       chart.update();
+      document.getElementById('stateName').textContent  = state;
       document.getElementById('valNo').textContent      = d.no.toFixed(2) + '%';
       document.getElementById('valYes').textContent     = d.yes.toFixed(2) + '%';
       document.getElementById('valNotSure').textContent = d.notSure.toFixed(2) + '%';
-      document.getElementById('stateName').textContent = state;
+
       chart2.data.datasets[0].data = [d.sOppose, d.swOppose, d.neither, d.swSupport, d.sSupport];
-chart2.update();
-document.getElementById('stateName2').textContent = state;
-document.getElementById('valSO').textContent   = d.sOppose.toFixed(2) + '%';
-document.getElementById('valSwO').textContent  = d.swOppose.toFixed(2) + '%';
-document.getElementById('valN').textContent    = d.neither.toFixed(2) + '%';
-document.getElementById('valSwS').textContent  = d.swSupport.toFixed(2) + '%';
-document.getElementById('valSS').textContent   = d.sSupport.toFixed(2) + '%';
+      chart2.update();
+      document.getElementById('stateName2').textContent = state;
+      document.getElementById('valSO').textContent      = d.sOppose.toFixed(2) + '%';
+      document.getElementById('valSwO').textContent     = d.swOppose.toFixed(2) + '%';
+      document.getElementById('valN').textContent       = d.neither.toFixed(2) + '%';
+      document.getElementById('valSwS').textContent     = d.swSupport.toFixed(2) + '%';
+      document.getElementById('valSS').textContent      = d.sSupport.toFixed(2) + '%';
     }
 
     select.addEventListener('change', e => updateChart(e.target.value));
